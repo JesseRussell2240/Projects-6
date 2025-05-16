@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project</title>
+  <link rel="stylesheet" href="format.css" />
+  <script defer src="script.js"></script>
+  <style>
+    /* Inline CSS for subtab buttons - black and gold style */
+    .subtab-nav {
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .subtab-nav a {
+      padding: 10px 20px;
+      background-color: #111;
+      border: 2px solid #FFD700;
+      color: #FFD700;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+    }
+    .subtab-nav a:hover {
+      background-color: #FFD700;
+      color: #111;
+    }
+    /* Section styling */
+    section.subtab-section {
+      padding: 40px 20px;
+      border-bottom: 1px solid #FFD700;
+      margin-bottom: 40px;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Optional: offset scrolling for fixed header if you have one */
+    /* You can adjust this if your fixed nav overlaps section headers */
+    section.subtab-section:target {
+      padding-top: 80px;
+      margin-top: -80px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="project.html">Project</a>
+    <a href="cam.html">Cam Feed</a>
+    <a href="bms.html">BMS Data</a>
+    <a href="setpoints.html">Set Points</a>
+    <a href="3dview.html">3D View</a>
+    <a href="live.html">Live Data</a>
+    <a href="log.html">Data Log</a>
+  </nav>
+
+  <div class="tab-content">
+    <h1>Project Overview</h1>
+
+    <!-- Subtab nav links (smooth scroll anchors) -->
+    <div class="subtab-nav">
+      <a href="#logbook">Weekly Logbook</a>
+      <a href="#useful-links">Useful Links</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#about-us">About Us</a>
+    </div>
+
+    <!-- Subtab sections -->
+    <section id="logbook" class="subtab-section">
+      <h2>Weekly Logbook</h2>
+      <p>Select a team Member to view their logbook:</p>
+	  <div class="subtab-nav">
+		<a href="log_hayden.html" target ="_blank">Hayden</a>
+		<a href="log_zach.html" target ="_blank">Zach</a>
+		<a href="log_josh.html" target ="_blank">josh</a>
+		<a href="log_jesse.html" target ="_blank">Jesse</a>
+		</div>
+    </section>
+
+    <section id="useful-links" class="subtab-section">
+      <h2>Useful Links</h2>
+      <p><Add information here></p>
+	  <a href="https://github.com/JesseRussell2240/Projects-6.git" target ="_blank"> Project Github</a>
+    </section>
+
+    <section id="timeline" class="subtab-section">
+      <h2>Project Timeline</h2>
+      <p>Track key tasks and their status:</p>
+	  
+	  <table id="schedule">
+			<thead>
+				<tr>
+					<th>Task</th>
+					<th>Deadline</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Design PCB Layout</td>
+					<td>2025-06-01</td>
+					<td><input type="checkbox" class="task-check"></td>
+				</tr>
+			<!-- Add rows here as needed -->
+			</tbody>
+		</table>
+
+				
+    </section>
+
+    <section id="about-us" class="subtab-section">
+		<h2>About Us</h2>
+		<p> Where are we from? </p>
+		<!-- Link to goggle maps -->
+		<p>
+		<a > <!--link target blank and style --> </a>
+		</p> 
+		
+		<!-- Embedded interactive map-->
+		<div style="border: 2px solid #cd7f32; border-radius: 8px; overflow: hidden; margin-top: 10px"
+			<iframe
+				src="https://maps.app.goo.gl/xRyuXhMKR8JvQx3Y6"
+				width="100%"
+				height="450"
+				style="border:0;"
+				allowfullscreen=""
+				loading="lazy"
+			</iframe>	
+		</div>
+    </section>
+  </div>
+</body>
+</html>

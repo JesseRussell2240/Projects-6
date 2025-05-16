@@ -1,0 +1,99 @@
+/* Body and base styles */
+body {
+  background-color: #000;
+  color: #ffd700;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+/* Main nav bar styles */
+nav {
+  background-color: #111;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+nav a {
+  color: #cd7f32; /* bronze/gold tone */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #222;
+  border-radius: 5px;
+}
+
+/* Container for subtabs navigation buttons */
+.subtab-nav {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Subtab anchor buttons styled black and gold */
+.subtab-nav a {
+  padding: 10px 20px;
+  background-color: #111; /* dark black background */
+  border: 2px solid #ffd700; /* gold border */
+  color: #ffd700; /* gold text */
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.subtab-nav a:hover,
+.subtab-nav a:focus {
+  background-color: #ffd700; /* gold background on hover */
+  color: #111; /* dark text on hover */
+  outline: none;
+}
+
+/* Subtab content sections */
+section.subtab-section {
+  padding: 40px 20px;
+  border-bottom: 1px solid #ffd700;
+  margin-bottom: 40px;
+}
+
+/* Offset for anchor target (if you have a fixed nav) */
+/* This prevents the section heading from being hidden behind nav */
+section.subtab-section:target {
+  padding-top: 80px;
+  margin-top: -80px;
+}
+
+#schedule {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#schedule th, #schedule td {
+  border: 1px solid #cd7f32;
+  padding: 10px;
+  text-align: left;
+}
+
+#schedule th {
+  background-color: #111;
+  color: #ffd700;
+}
+
+#schedule td {
+  background-color: #000;
+  color: #ffd700;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
