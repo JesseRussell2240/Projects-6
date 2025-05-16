@@ -1,8 +1,0 @@
-This Folder will contain the Following:
-
-Design Overviews
-  -GUI Sketch
-  -Block Diagrams
-Project Timeline
-Logbook *Note this will eventually be kept in the server as well
-Status Report
