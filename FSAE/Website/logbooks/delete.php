@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $id = $_POST['id'] ?? 0;
 
-// Verify ownership
+// Check ownership
 $stmt = $pdo->prepare("SELECT user_id FROM entries WHERE id = ?");
 $stmt->execute([$id]);
 $row = $stmt->fetch();
