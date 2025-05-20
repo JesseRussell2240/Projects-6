@@ -1,14 +1,14 @@
 <?php
+session_start();
 require 'db.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = $_POST['name'] ?? 'Anonymous';
-    $message = $_POST['message'] ?? '';
+$name = $_POST['name'] ?? 'Anonymous';
+$message = $_POST['message'] ?? '';
+$user_id = $_SESSION['user_id'] ?? null;
 
-    if (!empty($message)) {
-        $stmt = $pdo->prepare("INSERT INTO entries (name, message) VALUES (?, ?)");
-        $stmt->execute([$name, $message]);
-    }
+if (!empty($message)) {
+    $stmt = $pdo->prepare("INSERT INTO entries (name, message, user_id) VALUES (?, ?, ?)");
+    $stmt->execute([$name, $message, $user_id]);
 }
 
 header("Location: index.php");
