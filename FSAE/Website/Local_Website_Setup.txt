@@ -1,0 +1,107 @@
+
+fter imaging SD
+
+sudo apt update && sudo apt upgrade -y
+
+
+VNC
+
+sudo raspi-config
+Interface Options → VNC → Enable
+System Options → Boot / Auto Login → Desktop Autologin
+
+sudo nano /boot/config.txt
+add 
+
+hdmi_force_hotplug=1
+hdmi_group=2
+hdmi_mode=82
+
+sudo apt update
+sudo apt install realvnc-vnc-server realvnc-vnc-viewer
+
+sudo systemctl enable vncserver-x11-serviced
+sudo systemctl start vncserver-x11-serviced
+
+
+Install Server
+
+sudo apt update && sudo apt upgrade -y
+
+Install Apache,
+sudo apt install apache2 -y
+
+Install PHP and required modules,
+sudo apt install php libapache2-mod-php php-mysql -y
+
+Install MariaDB (MySQL),
+sudo apt install mariadb-server -y
+
+Secure MariaDB,
+sudo mysql_secure_installation
+
+
+Set root password
+
+Remove anonymous users: Y
+
+Disallow root remote login: Y
+
+Remove test database: Y
+
+Reload privileges: Y
+
+when complete 
+
+sudo mariadb -u root -p
+
+
+then inside maria 
+
+CREATE DATABASE logbooks;
+CREATE USER 'webuser'@'localhost' IDENTIFIED BY 'yourpassword';
+GRANT ALL PRIVILEGES ON logbooks.* TO 'webuser'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+
+cd /
+sudo git clone https://github.com/JesseRussell2240/Projects-6.git
+
+
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+
+replace DocumentRoot /var/www/html
+ with /Projects-6/FSAE/Website
+
+add premissions
+sudo chown -R www-data:www-data Projects-6/FSAE/Website
+sudo chmod -R 755 /Projects-6/FSAE/Website
+
+sudo systemctl restart apache2
+
+
+set up auto pull
+
+sudo nano /usr/local/bin/git_auto_pull.sh
+
+#!/bin/bash
+cd /Projects-6
+/usr/bin/git pull origin main
+
+sudo chmod +x /usr/local/bin/git_auto_pull.sh
+
+crontab -e
+
+add this next line to the bottom
+
+@reboot /usr/local/bin/git_auto_pull.sh
+
+sudo reboot
+
+hostname -I
+GitHub
+GitHub - JesseRussell2240/Projects-6: Elevator + FSAE Communications
+Elevator + FSAE Communications. Contribute to JesseRussell2240/Projects-6 development by creating an account on GitHub.
+Elevator + FSAE Communications. Contribute to JesseRussell2240/Projects-6 development by creating an account on GitHub.
