@@ -1,0 +1,3 @@
+../Core/Src/OBD2msg.c:23:6:readOBD2	3
+../Core/Src/OBD2msg.c:45:6:writeOBD2	2
+../Core/Src/OBD2msg.c:58:6:loadOBD2	2
