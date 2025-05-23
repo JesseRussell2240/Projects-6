@@ -6,7 +6,7 @@ body {
   margin: 0;                        /* Remove default margin */
   padding: 0;                       /* Remove default padding */
   scroll-behavior: smooth;         /* Smooth scrolling for anchor links */
-  padding-top: 70px;               /* Prevent content from hiding behind the fixed top banner */
+  padding-top: 120px;               /* Prevent content from hiding behind the fixed top banner */
 }
 
 /* === GLOBAL LINK STYLES === */
@@ -50,7 +50,7 @@ nav a.active {
   border-bottom: 2px solid #ffd700; /* Gold underline for visual cue */
 }
 
-/* === TOP BANNER === */
+/* === FIXED TOP BANNER === */
 #top-banner {
   position: fixed;               /* Keep at top during scroll */
   top: 0;
@@ -86,7 +86,7 @@ nav a.active {
   width: 0%; 
   overflow: visible;
 }
-/* === SCROLL CAR === */
+
 #scroll-car {
   position: absolute;
   top: -10px;         
