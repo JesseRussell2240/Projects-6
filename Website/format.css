@@ -50,7 +50,7 @@ nav a.active {
   border-bottom: 2px solid #ffd700; /* Gold underline for visual cue */
 }
 
-/* === FIXED TOP BANNER === */
+/* === TOP BANNER === */
 #top-banner {
   position: fixed;               /* Keep at top during scroll */
   top: 0;
@@ -58,12 +58,15 @@ nav a.active {
   background-color: #111;        /* Match nav bar color */
   color: #ffd700;                /* Gold text */
   display: flex;                 /* Flexbox layout for items in banner */
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
   justify-content: start;
   padding: 10px 20px;
   z-index: 1000;                 /* Stay above all other elements */
-  border-bottom: 2px solid #cd7f32; /* Bronze border for style */
+  /*border-bottom: none; */
+  border-bottom: 2px solid #cd7f32;  /* Bronze border for style */ 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+  position: fixed;
 }
 
 /* === LOGO STYLING INSIDE BANNER === */
@@ -71,6 +74,28 @@ nav a.active {
   height: 40px;                  /* Scaled logo height */
   margin-right: 15px;            /* Spacing between logo and title/text */
 }
+
+/* === SCROLL BAR === */
+#scroll-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: #ffd700;
+  z-index: 1001;
+  width: 0%; 
+  overflow: visible;
+}
+/* === SCROLL CAR === */
+#scroll-car {
+  position: absolute;
+  top: -10px;         
+  height: 20px;        
+  left: 0;
+  pointer-events: none;
+  transition: left 0.05s linear;
+}
+
 
 /* === SUBTAB NAVIGATION CONTAINER === */
 .subtab-nav {
