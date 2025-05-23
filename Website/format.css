@@ -6,7 +6,7 @@ body {
   margin: 0;                        /* Remove default margin */
   padding: 0;                       /* Remove default padding */
   scroll-behavior: smooth;         /* Smooth scrolling for anchor links */
-  padding-top: 120px;               /* Prevent content from hiding behind the fixed top banner */
+  padding-top: 140px;               /* Prevent content from hiding behind the fixed top banner */
 }
 
 /* === GLOBAL LINK STYLES === */
