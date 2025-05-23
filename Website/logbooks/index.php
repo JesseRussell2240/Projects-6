@@ -12,7 +12,8 @@ require 'db.php';
 <div id="top-banner">
     <span style="font-size:1.5em; font-weight:bold;">Project Logbook</span>
     <nav style="margin-left:40px;">
-        <a href="index.php" class="active">Home</a>
+        <a href="../project.html">Home</a>
+	<a href="index.php" class="active">Weekly Logbooks
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="logout.php">Logout</a>
         <?php else: ?>
