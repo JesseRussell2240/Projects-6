@@ -7,19 +7,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $confirm  = $_POST['confirm'];
 
-    // Basic validation
     if (strlen($username) < 3 || strlen($password) < 5) {
         $error = "Username must be at least 3 characters and password at least 5 characters.";
     } elseif ($password !== $confirm) {
         $error = "Passwords do not match.";
     } else {
-        // Check if username already exists
         $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
         $stmt->execute([$username]);
         if ($stmt->fetch()) {
             $error = "Username is already taken.";
         } else {
-            // Hash and insert
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare("INSERT INTO users (username, password_hash) VALUES (?, ?)");
             $stmt->execute([$username, $hash]);
@@ -47,13 +44,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Register</h2>
     <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
     <?php if (isset($success)) echo "<p style='color:green;'>$success</p>"; ?>
-    <form method="post">
-        <input type="text" name="username" placeholder="Username" required><br>
-        <input type="password" name="password" placeholder="Password" required><br>
-        <input type="password" name="confirm" placeholder="Confirm Password" required><br>
+    <form method="post" class="register-form">
+        <div class="form-row">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-row">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-row">
+            <label for="confirm">Confirm</label>
+            <input type="password" id="confirm" name="confirm" required>
+        </div>
         <button type="submit">Register</button>
     </form>
 </section>
 </body>
 </html>
-
