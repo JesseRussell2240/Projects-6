@@ -141,3 +141,51 @@ input[type="checkbox"] {
   transform: scale(1.2);         /* Make checkboxes larger */
   cursor: pointer;               /* Show pointer on hover */
 }
+
+
+.register-form {
+  max-width: 400px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-row label {
+  width: 120px;
+  text-align: right;
+  margin-right: 10px;
+  color: #ffd700;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 6px;
+  font-size: 1em;
+  background-color: #111;
+  border: 1px solid #ffd700;
+  color: #ffd700;
+}
+
+button[type="submit"] {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #cd7f32;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #ffd700;
+  color: #111;
+}
