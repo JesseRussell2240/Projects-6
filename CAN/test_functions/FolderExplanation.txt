@@ -1,0 +1,7 @@
+fetch_parameters: Uses sql-connect to read new values from data base
+
+update_can.py: Called from website. This will run fetch_params 
+and store them in an array
+
+send_can.py: Also called from website. This will take the array: params[] and c
+onvert then write the values via to the motor controller
