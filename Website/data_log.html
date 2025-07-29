@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FSAE Data Logging</title>
+  <link rel="icon" href="./Media/Photos/Logo.png" type="image/png" />
+  <link rel="stylesheet" href="format.css" />
+  <script defer src="data_log/can_log.js"></script>
+  <script defer src="data_log/log_export.js"></script>
+</head>
+
+<body>
+  <header id="top-banner">
+    <div class="banner-content">
+      <img src="./Media/Photos/Logo.png" alt="Team Logo" id="logo" />
+      <h1>Conestoga Electric FSAE</h1>
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Live_Can.html">Live CAN Data</a>
+      <a href="BMS_Data.html">BMS Data</a>
+      <a href="parameters.php">Parameters</a>
+      <a href="3D_View.html">3D View</a>
+      <a href="live_data.html">Live Data</a>
+      <a href="data_log.html" class="active">Data Log</a>
+      <a href="media.html">Weekly Media</a>
+    </nav>
+  </header>
+
+  <div class="tab-content">
+    <h2>Data Logging & Export</h2>
+
+    <section class="subtab-section">
+      <h3>Start or Stop Logging</h3>
+      <div class="subtab-nav">
+        <a id="startLoggingBtn">Start Logging</a>
+        <a id="stopLoggingBtn" class="disabled" style="pointer-events: none; opacity: 0.6;">Stop Logging</a>
+      </div>
+    </section>
+
+    <section class="subtab-section">
+      <h3>Export Logged Session</h3>
+      <label for="logSessionSelect">Select a logged session:</label><br /><br />
+      <select id="logSessionSelect" class="readonly-field">
+        <option disabled selected>-- No sessions found --</option>
+      </select>
+      <br /><br />
+      <a id="exportCsvBtn" href="#" class="subtab-nav" download>Export as CSV</a>
+    </section>
+  </div>
+</body>
+</html>

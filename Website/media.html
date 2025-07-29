@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- 
+  FSAE Weekly Media Archive
+  Author(s): Conestoga Electric FSAE Team
+  Description: A navigable media log by week showing photos, videos, and embedded content from the project.
+  Last Updated: 2025
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>FSAE Media Archive</title>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="format.css" />
+
+  <!-- Page Favicon -->
+  <link rel="icon" href="../Media/Photos/Logo.png" type="image/png">
+
+  <!-- External Script -->
+  <script defer src="script.js"></script>
+
+  <!-- Internal Styles -->
+  <style>
+    /* Side navigation panel */
+    #side-menu {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 160px;
+      height: 100%;
+      background-color: #111;
+      color: #ffd700;
+      padding: 140px 15px 15px 15px;
+      box-shadow: 2px 0 6px rgba(0, 0, 0, 0.5);
+      box-sizing: border-box;
+    }
+
+    #side-menu a {
+      display: block;
+      margin: 10px 0;
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #side-menu a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content area */
+    .tab-content {
+      margin-left: 180px;
+      padding: 20px 40px;
+    }
+
+    /* Week section toggling */
+    .week-section {
+      display: none;
+    }
+
+    .week-section.active {
+      display: block;
+    }
+
+    /* Media figure layout */
+    figure {
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    figcaption {
+      font-size: 0.9em;
+      color: GOLD;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ======================= TOP BANNER ======================= -->
+  <header id="top-banner">
+    <div class="banner-content">
+      <img src="../Media/Photos/Logo.png" alt="Team Logo" id="logo">
+      <h1>Conestoga Electric FSAE</h1>
+    </div>
+
+    <!-- Top Navigation Links -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Live_Can.html">Live CAN Data</a>
+      <a href="BMS_Data.html">BMS Data</a>
+      <a href="parameters.php">Parameters</a>
+      <a href="3D_View.html">3D View</a>
+      <a href="live_data.html">Live Data</a>
+      <a href="data_log.html">Data Log</a>
+      <a href="media.html" class="active">Weekly Media</a>
+    </nav>
+  </header>
+
+  <!-- ======================= SIDE WEEK SELECTOR ======================= -->
+  <div id="side-menu">
+    <!-- Week Tabs for Navigation -->
+    <a href="#" onclick="showSection('week1')">Week 1</a>
+    <a href="#" onclick="showSection('week2')">Week 2</a>
+    <a href="#" onclick="showSection('week3')">Week 3</a>
+    <a href="#" onclick="showSection('week4')">Week 4</a>
+    <a href="#" onclick="showSection('week5')">Week 5</a>
+    <a href="#" onclick="showSection('week6')">Week 6</a>
+    <a href="#" onclick="showSection('week7')">Week 7</a>
+    <a href="#" onclick="showSection('week8')">Week 8</a>
+    <a href="#" onclick="showSection('week9')">Week 9</a>
+    <a href="#" onclick="showSection('week10')">Week 10</a>
+    <a href="#" onclick="showSection('week11')">Week 11</a>
+    <a href="#" onclick="showSection('week12')">Week 12</a>
+    <a href="#" onclick="showSection('week13')">Week 13</a>
+    <a href="#" onclick="showSection('week14')">Week 14</a>
+  </div>
+
+<!-- ======================= MAIN MEDIA SECTION ======================= -->
+  <div class="tab-content" id="media-container">
+    <section class="week-section active" id="week1">
+      <h2>Week 1 Media</h2>
+    </section>
+    <section class="week-section" id="week2">
+      <h2>Week 2 Media</h2>
+    </section>
+    <section class="week-section" id="week3">
+      <h2>Week 3 Media</h2>
+    </section>
+    <section class="week-section" id="week4">
+      <h2>Week 4 Media</h2>
+      <figure>
+        <img src="Media/Photos/ZachWeek3.png" alt="Zach working" width="600">
+        <figcaption>Zach hard at work during Week 4.</figcaption>
+      </figure>
+      <figure>
+        <video width="600" controls>
+          <source src="Media/Videos/Jesse_Explain_motor.mp4" type="video/mp4">
+        </video>
+        <figcaption>Jesse explains the motor function.</figcaption>
+      </figure>
+      <figure>
+        <video width="600" controls>
+          <source src="Media/Videos/JoshDemo.mp4" type="video/mp4">
+        </video>
+        <figcaption>Josh demonstrates the subsystem.</figcaption>
+      </figure>
+      <figure>
+        <iframe src="https://docs.google.com/document/d/e/2PACX-1vR_gYCvCX7bRfsyQ8If_gwRC_uD2aQO3JnGLWnflC2M5JG2FgqJVNESpoCT43wLeN0bbRG8ZKvUqIig/pub?embedded=true" width="800" height="600" style="border: none;"></iframe>
+        <figcaption>Design documentation for Week 4.</figcaption>
+      </figure>
+      
+    </section>
+     <section class="week-section" id="week5">
+      <h2>Week 5 Media</h2>
+      <figure><img src="Media/Photos/board_3D.png" width="600"><figcaption>3D Board View</figcaption></figure>
+      <figure><img src="Media/Photos/board_routing.png" width="600"><figcaption>2D Board View</figcaption></figure>
+      <figure><img src="Media/Photos/Can.png" width="600"><figcaption>STM Hat: CAN Schematic</figcaption></figure>
+      <figure><img src="Media/Photos/imd.png" width="600"><figcaption>STM Hat: IMD Headers</figcaption></figure>
+      <figure><img src="Media/Photos/general_pins.png" width="600"><figcaption>STM Hat: STM IO</figcaption></figure>
+      <figure><img src="Media/Photos/OMD_SC.jpg" width="600"><figcaption>IMD Scope Reading</figcaption></figure>
+      <figure><img src="Media/Photos/relays.png" width="600"><figcaption>STM Hat: Relays Schematic</figcaption></figure>
+      <figure><img src="Media/Photos/Temp_Sensor.png" width="600"><figcaption>STM Hat: Temp Sensor Headers</figcaption></figure>
+      <figure><img src="Media/Photos/VReg.png" width="600"><figcaption>STM Hat: 12-5V Regulator</figcaption></figure>
+      <figure><video width="600" controls><source src="Media/Videos/AltiumRev1.mp4" type="video/mp4"></video><figcaption>STM Hat: Altium Design Explanation</figcaption></figure>
+      <figure><video width="600" controls><source src="Media/Videos/DB_Demo.mp4" type="video/mp4"></video><figcaption>Writing and Reading parameters from Database</figcaption></figure>
+      <figure><video width="600" controls><source src="Media/Videos/HaydenWeek5Vid.mp4" type="video/mp4"></video><figcaption>STM Temp Sensor Integration Demo</figcaption></figure>
+      <figure><video width="600" controls><source src="Media/Videos/LCD_Demo.mp4" type="video/mp4"></video><figcaption>Steering Display Proof of Concept using ESP32</figcaption></figure>
+    </section>
+    
+    
+    <section class="week-section" id="week6">
+      <h2>Week 6 Media</h2>
+      <figure><img src="Media/Photos/LCDWeek6.jpeg" width="600"><figcaption>Displaying LCD Message</figcaption></figure>
+      <figure>
+        <iframe src="https://docs.google.com/document/d/e/2PACX-1vSfwN75OK6jq3jXtK7yH2YpK-cRy8kjK1DknMAOBFGhcfhZFXUr3VWTNG04lvLUI2T1NwZVLcOd5nt-/pub?embedded=true" width="800" height="600" style="border: none;"></iframe>
+        <figcaption>IMD to STM32 Documentation</figcaption>
+      </figure>
+      <figure><img src="Media/Photos/IDELCDCode.png" width="600"><figcaption>LCD Code Snippet in IDE</figcaption></figure>
+      <figure><img src="Media/Photos/PycharmLCDCode.png" width="600"><figcaption>LCD Code Snippet in Pycharm</figcaption></figure>
+      <figure><img src="Media/Photos/params.png" width="600"><figcaption>Parameter Limits</figcaption></figure>
+    </section>
+    
+    
+    <section class="week-section" id="week7"><h2>Week 7 Media</h2></section>
+    <section class="week-section" id="week8"><h2>Week 8 Media</h2></section>
+    
+    
+    <section class="week-section" id="week9"><h2>Week 9 Media</h2>
+    
+    <figure><img src="Media/Photos/Week9_IMages/bread_board.jpg" width="600"><figcaption>IMD Bread Board</figcaption></figure>
+    <figure><img src="Media/Photos/Week9_IMages/CFE_PCB.jpg" width="600"><figcaption>Custom PCB</figcaption></figure>
+    <figure><img src="Media/Photos/Week9_IMages/proto_board.jpg" width="600"><figcaption>IMD protoboard</figcaption></figure>
+    <figure><img src="Media/Photos/Week9_IMages/sketch.jpg" width="600"><figcaption>Schematic Sketch</figcaption></figure>
+    <figure><img src="Media/Photos/Week9_IMages/solder.jpg" width="600"><figcaption>Custom PCB Solder</figcaption></figure>
+    <figure><img src="Media/Photos/Week9_IMages/solder_2.jpg" width="600"><figcaption>Custom PCB Solder</figcaption></figure>
+    <figure><img src="Media/Photos/Week9_IMages/working_jesse.jpg" width="600"><figcaption>Jesse hard at work</figcaption></figure>
+
+    
+    
+    
+    </section>
+    <section class="week-section" id="week10"><h2>Week 10 Media</h2>
+    
+    <figure><img src="Media/Photos/week10_Images/CAN_Messages1.PNG" width="600"><figcaption>CAN Message Table 1 from BAMOCAR Manual</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/Can_Messages2.PNG" width="600"><figcaption>CAN Message Table 2 from BAMOCAR Manual</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/Cyclic_Enable_Request_Can.PNG" width="600"><figcaption>CAN Message to Enable Cyclic Transmission</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/Cyclic_Response.PNG" width="600"><figcaption>Response from BAMOCAR when Cyclic Transmission is Enabled</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/GLV.png" width="600"><figcaption>GLV System Diagram (Grounded Low Voltage)</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/harness.jpg" width="600"><figcaption>Main wire harness routing through vehicle chassis</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/harness2.jpg" width="600"><figcaption>Secondary view of harness connection near motor controller</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/jesse_focused.jpg" width="600"><figcaption>Jesse debugging CAN connection</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/jesse_happy.jpg" width="600"><figcaption>Jesse happy after successful CAN message transmission</figcaption></figure>
+    <figure><video width="600" controls><source src="Media/Photos/week10_Images/live_data.mp4" type="video/mp4">Your browser does not support the video tag.</video><figcaption>Live data stream from BAMOCAR using CAN on Raspberry Pi</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/Power_Diagram.png" width="600"><figcaption>Complete system power wiring diagram</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/SCR06.PNG" width="600"><figcaption>SCR06: Schematic for high voltage relay integration</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/Set15Parameters_Can.PNG" width="600"><figcaption>CAN Message Format for Writing 15 Parameters to BAMOCAR</figcaption></figure>
+    <figure><img src="Media/Photos/week10_Images/SetMotorSpeed_Can.PNG" width="600"><figcaption>CAN Frame to Set Motor Speed</figcaption></figure>
+    <figure><video width="600" controls><source src="Media/Photos/week10_Images/ShrekLCDTest.mp4" type="video/mp4">Your browser does not support the video tag.</video><figcaption>Testing LCD screen with Shrek clip to verify video playback</figcaption></figure>
+
+    </section>
+
+    
+    <section class="week-section" id="week11"><h2>Week 11 Media</h2></section>
+    <section class="week-section" id="week12"><h2>Week 12 Media</h2></section>
+    <section class="week-section" id="week13"><h2>Week 13 Media</h2></section>
+    <section class="week-section" id="week14"><h2>Week 14 Media</h2></section>
+  </div>
+
+  <!-- ======================= SECTION TOGGLE SCRIPT ======================= -->
+  <script>
+    // Handles showing the correct week's media
+    function showSection(id) {
+      document.querySelectorAll('.week-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

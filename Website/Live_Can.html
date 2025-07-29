@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Conestoga Electric FSAE Database</title>
+  <link rel="stylesheet" href="format.css" />
+  <link rel="icon" href="./Media/Photos/Logo.png" type="image/png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="live_can/script.js"></script>
+</head>
+<body>
+  <header id="top-banner">
+    <div class="banner-content">
+      <img src="./Media/Photos/Logo.png" alt="Team Logo" id="logo">
+      <h1>Conestoga Electric FSAE</h1>
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Live_Can.html" class="active">Live CAN Data</a>
+      <a href="BMS_Data.html">BMS Data</a>
+      <a href="parameters.php">Parameters</a>
+      <a href="3D_View.html">3D View</a>
+      <a href="live_data.html">Live Data</a>
+      <a href="data_log.html">Data Log</a>
+      <a href="media.html">Weekly Media</a>
+    </nav>
+  </header>
+
+  <div class="tab-content">
+    <!-- Filter Dropdown -->
+    <label for="can-id-filter">Filter by CAN ID:</label>
+    <select id="can-id-filter">
+      <option value="all">All</option>
+    </select>
+
+    <div style="overflow-y:auto; max-height:400px; border:1px solid #888;">
+      <table style="width:100%; border-collapse: collapse; text-align: center;">
+        <thead style="background-color:#111; color:#ffd700;">
+          <tr>
+            <th>ID</th><th>Length</th>
+            <th>Byte0</th><th>Byte1</th><th>Byte2</th><th>Byte3</th>
+            <th>Byte4</th><th>Byte5</th><th>Byte6</th><th>Byte7</th>
+            <th>Count</th><th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody id="can-table-body"></tbody>
+      </table>
+    </div>
+
+    <!-- CAN Waveform Visualizer -->
+    <h2>CAN Waveform Visualizer</h2>
+    <div id="waveform-container"></div>
+  </div>
+</body>
+</html>

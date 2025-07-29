@@ -1,0 +1,12 @@
+[
+    {
+        "parameter": "motor_rpm",
+        "value": "600",
+        "timestamp": "2025-07-08T19:36:26.667Z"
+    },
+    {
+        "parameter": "motor_rpm",
+        "value": "800",
+        "timestamp": "2025-07-08T19:36:36.647Z"
+    }
+]

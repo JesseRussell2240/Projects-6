@@ -1,0 +1,204 @@
+S<!DOCTYPE html>
+
+<!-- 
+  Conestoga Electric FSAE Website 
+  Author(s): Hayden F, Zach M, Josh D, Jesse 
+  Description: This is the main landing page of the Electric FSAE team project site.
+  Last Updated: 2025
+-->
+
+<!-- Page Favicon -->
+<link rel="icon" href="../Media/Photos/Logo.png" type="image/png">
+
+<!-- Begin HTML Document -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  
+  <!-- Meta Tags for SEO and Author Info -->
+    <meta name="description" content="Conestoga FSAE Home Page" />
+  <meta name="robots" content="noindex nofollow" />
+  <meta http-equiv="author" content="Hayden F, Zach M, Josh D & Stinky Jesse">
+  <meta http-equiv="pragma" content="no-cache" />
+  <!-- END -->
+  
+  <!-- Title and External Resources -->
+  <title>Conestoga Electric FSAE Datbase</title>
+  <link rel="stylesheet" href="format.css" />
+  <script defer src="script.js">
+  </script>
+  
+  
+  
+  
+  
+</head>
+<body>
+
+	<!-- ======================== HEADER SECTION ======================== -->
+	<header id="top-banner">
+  		<div class="banner-content">
+		  <!-- Team Logo -->
+    		  <img src="../Media/Photos/Logo.png" alt="Team Logo" id="logo">
+    		  <!-- Site Title -->
+		  <h1>Conestoga Electric FSAE</h1>
+  		</div>
+		
+		<!-- Main Navigation Bar -->
+  		<nav>
+    		  <a href="index.html" class="active">Home</a>
+   		  <a href="Live_Can.html">Live CAN Data</a>
+  		  <a href="BMS_Data.html">BMS Data</a>
+  		  <a href="parameters.php">Parameters</a>
+  		  <a href="3D_View.html">3D View</a>
+  		  <a href="live_data.html">Live Data</a>
+  		  <a href="data_log.html">Data Log</a>
+		  <a href="media.html">Weekly Media</a>
+		  
+  		</nav>
+
+	<!-- Scroll Progress Indicator -->
+	<div id="scroll-progress-bar">
+	  <img src="../Media/Photos/CarPng.png" id="scroll-car" alt="Racecar">
+	</div>
+	</header>
+	
+
+
+   <!-- ======================== MAIN CONTENT ======================== -->
+  <div class="tab-content">
+    
+    <!-- Overview Header -->
+    <h1>Project Overview</h1>
+
+    <!-- ===== Subtab Navigation Links ===== -->
+    <div class="subtab-nav">
+      <a href="#logbook">Weekly Logbook</a>
+      <a href="#useful-links">Documentation</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#about-us">About Us</a>
+    </div>
+
+    <!-- ===== Weekly Logbook Section ===== -->
+    <section id="logbook" class="subtab-section">
+      <h2>Team Updates</h2>
+      
+		<!-- Links to Logs -->
+		<div class="subtab-nav">
+			<a href="logbooks/index.php"> Team Logbooks</a>
+		</div>
+		
+		<!-- Links to Status Report -->
+		<div class="subtab-nav">
+			<a href="Status/weekly_reports.php"> Weekly Status reports</a>
+		</div>
+    </section>
+
+    <!-- ===== Documentation Section ===== -->
+    <section id="useful-links" class="subtab-section">
+      <h2>Documentation</h2>
+      
+	<div class="doc-entry">
+	  
+	  <!-- Toggleable iframe for CANBUS Test Plan -->
+	  <button id="toggleCanBtn" onclick="toggleIframe('CanTestPlan', 'toggleCanBtn')" style="margin-top: 15px;"> 
+	  Show CANBUS Test Plan
+	  </button>
+	  
+	  <iframe id="CanTestPlan"
+	    width="750"
+	    height="500"
+	    style="display: none; margin-top: 10px;"
+	    src="https://docs.google.com/document/d/e/2PACX-1vR_gYCvCX7bRfsyQ8If_gwRC_uD2aQO3JnGLWnflC2M5JG2FgqJVNESpoCT43wLeN0bbRG8ZKvUqIig/pub?embedded=true">
+	    </iframe>
+    
+	  <!-- Toggleable iframe for BAMOCAR D3 CAN table -->
+	  <button id="toggleBamoBtn" onclick="toggleIframe('Bamo', 'toggleBamoBtn')" style="margin-top: 15px;"> 
+	  Show BAMOCAR D3 CAN
+	  </button>
+	  
+	  <!-- Embedded Timeline Sheet -->
+	  <iframe id="Bamo"
+	    width="750"
+	    height="500"
+	    style="display: none; margin-top: 10px;"
+	    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS2suMPBVzz_dvlL_0NjOdS49hVrxqFMSDuuhmFKM21O8fj90D73BEciJqVegCab7D2DUJ1okfl32cg/pubhtml?widget=true&amp;headers=false">
+	  </iframe>
+	</div>
+	  
+    </section>
+
+    <!-- ===== Timeline Section ===== -->
+    <section id="timeline" class="subtab-section">
+      <h2>Project Timeline</h2>
+      <p>Track key tasks and their status:</p>
+	  
+		<iframe 
+			width="1000"
+			height="500"
+			src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR7kNtA_4ahQD0lA0Eag-_eAdUPAXu3S4IM-DNn2jwl9-BFgqGFIRBIcS6gskhrqg/pubhtml?widget=true&amp;headers=false">
+		</iframe>
+	 
+
+				
+    </section>
+
+    <!-- ===== About Us Section ===== -->
+    <section id="about-us" class="subtab-section">
+		<h>About Us</h>
+		<h2> Where are we from? <h2/>
+		
+		
+		<!-- External Link to Google Maps -->
+		<p>
+		<a href="https://www.google.com/maps/place/Conestoga+College+Cambridge+-+Fountain+Street+campus/@43.3870521,-80.3999054,2046m/data=!3m2!1e3!4b1!4m6!3m5!1s0x882b8a7ec9d60715:0xd5e712873de8af2d!8m2!3d43.3870521!4d-80.3973251!16s%2Fg%2F1hc5bt6b4?entry=ttu&g_ep=EgoyMDI1MDUxMy4xIKXMDSoASAFQAw%3D%3D" 
+		target="_blank"
+		style="color: #cd7f32; text-direction: underline;">
+		View us on google Maps!
+		</a>
+		</p> 
+		
+		<!-- Embedded Google Map -->
+		<div style="border: 2px solid #cd7f32; border-radius: 8px; overflow: hidden; margin-top: 10px;">
+			<iframe
+				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15311.660694764849!2d-80.40101637761158!3d43.391842440417776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b8a7ec9d60715%3A0xd5e712873de8af2d!2sConestoga%20College%20Cambridge%20-%20Fountain%20Street%20campus!5e1!3m2!1sen!2sca!4v1747420180438!5m2!1sen!2sca" 
+				width="1000" 
+				height="300" 
+				style="border:0;" 
+				allowfullscreen="" 
+				loading="lazy" 
+				referrerpolicy="no-referrer-when-downgrade">
+			</iframe>
+		</div>
+		
+		<!-- Team Introduction Video -->
+		<h2>Meet the Team</h2>
+			<video width="100%" height="auto" controls>
+				<source src="../Media/Videos/Project6Intro.mp4" type="video/mp4">
+				Your Browser does not support the video tag
+			</video>
+		
+		
+    </section>
+    
+    <section id="timeline" class="subtab-section">
+
+      <p>&copy; 2025 Hayden F, Zach M, Josh D & Jesse :( </p>
+      
+      <!-- Project Repo -->
+      <a href="https://github.com/JesseRussell2240/Projects-6.git" target ="_blank"> Project Github <br> </a>
+      
+      <!-- Easter Egg Link -->
+      <a href="https://www.costcobusinesscentre.ca/hot-dogs-sausages.html" target ="_blank"> If You're Hungry</a>
+      
+      
+      <p id="datetime"></p>
+  
+    </section>
+
+  </div> <!-- END tab-content -->
+
+</body>
+</html>
+
+

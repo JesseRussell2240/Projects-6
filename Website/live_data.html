@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Conestoga Electric FSAE Database</title>
+  <link rel="icon" href="./Media/Photos/Logo.png" type="image/png" />
+  <link rel="stylesheet" href="format.css" />
+  <script defer src="live_data/can_data.js"></script>
+</head>
+
+<body>
+  <header id="top-banner">
+    <div class="banner-content">
+      <img src="./Media/Photos/Logo.png" alt="Team Logo" id="logo" />
+      <h1>Conestoga Electric FSAE</h1>
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Live_Can.html">Live CAN Data</a>
+      <a href="BMS_Data.html">BMS Data</a>
+      <a href="parameters.php">Parameters</a>
+      <a href="3D_View.html">3D View</a>
+      <a href="live_data.html" class="active">Live Data</a>
+      <a href="data_log.html">Data Log</a>
+      <a href="media.html">Weekly Media</a>
+    </nav>
+  </header>
+
+  <div class="tab-content">
+    <h2>Live Vehicle Data</h2>
+    
+    <div class="subtab-nav" style="margin-top: 20px;">
+      <a id="toggleCyclicBtn"> Toggle Cyclic Motor Controller Updates</a>
+    </div>
+
+    <section class="subtab-section">
+      <h3>Current Telemetry</h3>
+
+      <table id="live-data-table" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+          <tr>
+            <th style="text-align: left; border-bottom: 1px solid #ffd700;">Parameter</th>
+            <th style="text-align: left; border-bottom: 1px solid #ffd700;">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Motor RPM</td>
+            <td id="motor-rpm">--</td>
+          </tr>
+          
+          <tr>
+            <td>Voltage Current Draw</td>
+            <td id="motor-voltage">--</td>
+          </tr>
+          
+          <tr>
+            <td>Motor Current Draw</td>
+            <td id="motor-current">--</td>
+          </tr>
+          
+          <tr>
+            <td>State of Charge</td>
+            <td id="battery-soc">--</td>
+          </tr>
+          <tr>
+            <td>Motor Temperature</td>
+            <td id="motor-temp">--</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</body>
+</html>

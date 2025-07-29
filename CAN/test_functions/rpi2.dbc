@@ -1,0 +1,36 @@
+VERSION ""
+
+NS_ :
+    CM_
+    SG_
+    BO_
+    BU_
+    VAL_
+
+BS_:
+
+BU_: RaspberryPi BMS Third_Party_Device
+
+BO_ 385 BAMOCAR_Response: 4 BAMOCAR
+ SG_ RawValue : 0|32@1- (1,0) [-2147483648|2147483647] "" RaspberryPi
+
+CM_ BO_ 385 "Raw 32-bit value from BAMOCAR. Register ID must be inferred by value position.";
+CM_ SG_ 385 RawValue "Raw signed 32-bit value sent in little-endian order.";
+
+BO_ 1793 MSGID_0X701: 8 BMS
+ SG_ Pack_SOC : 7|8@0+ (0.5,0) [0|0] "Percent"  Third_Party_Device
+ SG_ Blank1 : 15|8@0+ (1.0,0) [0|0] ""  Third_Party_Device
+ SG_ Blank2 : 23|8@0+ (1.0,0) [0|0] ""  Third_Party_Device
+ SG_ Blank3 : 31|8@0+ (1.0,0) [0|0] ""  Third_Party_Device
+ SG_ Blank4 : 39|8@0+ (1.0,0) [0|0] ""  Third_Party_Device
+ SG_ Blank5 : 47|8@0+ (1.0,0) [0|0] ""  Third_Party_Device
+ SG_ Blank6 : 55|8@0+ (1.0,0) [0|0] ""  Third_Party_Device
+ SG_ CRC_Checksum : 63|8@0+ (1.0,0) [0|0] ""  Third_Party_Device
+
+CM_ BO_ 1793 "This ID Transmits at 200 ms.";
+
+BO_ 272 PWM_Status: 8 RaspberryPi
+ SG_ PWM_Freq  : 8|8@1+ (1,0) [0|255] "Hz" RaspberryPi
+ SG_ PWM_Duty  : 16|8@1+ (0.392,0) [0|100] "%" RaspberryPi
+ SG_ PWM_Status: 24|8@1+ (1,0) [0|255] "" RaspberryPi
+
