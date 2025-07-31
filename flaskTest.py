@@ -1,44 +1,54 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
 import can
+from abc import ABC, abstractmethod
 
+# Base class
+class CANDevice(ABC):
+    def __init__(self, interface: str):
+        self.bus = can.interface.Bus(channel=interface, bustype='socketcan')
+
+    def send(self, arbitration_id: int, data: list):
+        msg = can.Message(arbitration_id=arbitration_id, data=data, is_extended_id=False)
+        self.bus.send(msg)
+
+# Derived class
+class MotorController(CANDevice):
+    def __init__(self, interface='can0', tx_id=0x201):
+        super().__init__(interface)
+        self.tx_id = tx_id
+        self.enable_reg = 0x51
+        self.speed_reg = 0x31
+
+    def enable(self):
+        data = [self.enable_reg, 0x01, 0x00]
+        self.send(self.tx_id, data)
+
+    def disable(self):
+        data = [self.enable_reg, 0x04, 0x00]
+        self.send(self.tx_id, data)
+
+    def set_rpm(self, rpm):
+        data = [self.speed_reg, rpm & 0xFF, (rpm >> 8) & 0xFF]
+        self.send(self.tx_id, data)
+
+# Flask App
 app = Flask(__name__)
-
-# CAN Config
-CAN_INTERFACE = 'can0'
-TX_ID = 0x201
-ENABLE_CMD_REGID = 0x51
-SPEED_CMD_REGID = 0x31
-ENABLE_VALUE = 0x0001
-DISABLE_VALUE = 0x0004
-RPM_VALUE = 6000
-
-bus = can.interface.Bus(channel=CAN_INTERFACE, bustype='socketcan')
-
-def send_enable_command(enable: bool):
-    value = ENABLE_VALUE if enable else DISABLE_VALUE
-    data = [ENABLE_CMD_REGID, value & 0xFF, (value >> 8) & 0xFF]
-    msg = can.Message(arbitration_id=TX_ID, data=data, is_extended_id=False)
-    bus.send(msg)
-
-def send_rpm_command(rpm: int):
-    data = [SPEED_CMD_REGID, rpm & 0xFF, (rpm >> 8) & 0xFF]
-    msg = can.Message(arbitration_id=TX_ID, data=data, is_extended_id=False)
-    bus.send(msg)
+motor = MotorController()
 
 @app.route('/motor/start', methods=['POST'])
 def start_motor():
     try:
-        send_enable_command(True)
-        send_rpm_command(RPM_VALUE)
-        return jsonify({'status': 'Motor started'}), 200
+        motor.enable()
+        motor.set_rpm(6000)
+        return jsonify({'status': 'Motor started'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 @app.route('/motor/stop', methods=['POST'])
 def stop_motor():
     try:
-        send_enable_command(False)
-        return jsonify({'status': 'Motor stopped'}), 200
+        motor.disable()
+        return jsonify({'status': 'Motor stopped'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
