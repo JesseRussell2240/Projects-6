@@ -1,0 +1,6 @@
+../Core/Src/OBD2msg.c:34:6:readOBD2	32	static
+../Core/Src/OBD2msg.c:56:6:writeOBD2	24	static
+../Core/Src/OBD2msg.c:69:6:readOBD2BMS	40	static
+../Core/Src/OBD2msg.c:100:6:writeOBD2BMS	32	static
+../Core/Src/OBD2msg.c:118:6:writeIMD	16	static
+../Core/Src/OBD2msg.c:132:6:loadOBD2	24	static

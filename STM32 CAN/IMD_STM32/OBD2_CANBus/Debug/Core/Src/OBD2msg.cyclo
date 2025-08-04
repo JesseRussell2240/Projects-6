@@ -1,0 +1,6 @@
+../Core/Src/OBD2msg.c:34:6:readOBD2	3
+../Core/Src/OBD2msg.c:56:6:writeOBD2	2
+../Core/Src/OBD2msg.c:69:6:readOBD2BMS	4
+../Core/Src/OBD2msg.c:100:6:writeOBD2BMS	3
+../Core/Src/OBD2msg.c:118:6:writeIMD	1
+../Core/Src/OBD2msg.c:132:6:loadOBD2	2
