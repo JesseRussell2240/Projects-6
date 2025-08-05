@@ -17,7 +17,7 @@
 
     <nav>
       <a href="index.html">Home</a>
-      <a href="Live_Can.html" class="active">Live CAN Data</a>
+      <a href="Live_Can.html" class="active">Diagnostics</a>
       <a href="BMS_Data.html">BMS Data</a>
       <a href="parameters.php">Parameters</a>
       <a href="3D_View.html">3D View</a>
@@ -34,6 +34,7 @@
       <option value="all">All</option>
     </select>
 
+    <!-- CAN Table -->
     <div style="overflow-y:auto; max-height:400px; border:1px solid #888;">
       <table style="width:100%; border-collapse: collapse; text-align: center;">
         <thead style="background-color:#111; color:#ffd700;">
@@ -51,6 +52,19 @@
     <!-- CAN Waveform Visualizer -->
     <h2>CAN Waveform Visualizer</h2>
     <div id="waveform-container"></div>
+
+    <!-- Additional Graphs -->
+    <h2 style="margin-top: 40px;">Live Sensor Graphs</h2>
+
+    <div class="chart-container">
+      <h3>Acceleration (X, Y, Z)</h3>
+      <canvas id="accelerationGraph"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h3>Velocity (X, Y, Z)</h3>
+      <canvas id="velocityGraph"></canvas>
+    </div>
   </div>
 </body>
 </html>

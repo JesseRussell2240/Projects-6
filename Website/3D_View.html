@@ -1,41 +1,52 @@
 <!DOCTYPE html>
-
-<link rel="icon" href="./Media/Photos/Logo.png" type="image/png">
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Conestoga Electric FSAE Datbase</title>
+  <title>Conestoga Electric FSAE Database</title>
+  <link rel="icon" href="./Media/Photos/Logo.png" type="image/png">
   <link rel="stylesheet" href="format.css" />
-  <script defer src="script.js"></script>
-  
+  <style>
+    #viewer-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      margin-top: 100px; /* Push below fixed header */
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script type="module" src="3D_View/3D_View.js"></script>
 </head>
 <body>
 
-	<header id="top-banner">
-		<div class="banner-content">
-			<img src="./Media/Photos/Logo.png" alt="Team Logo" id="logo">
-			<h1>Conestoga Electric FSAE</h1>
-	
-		</div>
+  <header id="top-banner">
+    <div class="banner-content">
+      <img src="./Media/Photos/Logo.png" alt="Team Logo" id="logo">
+      <h1>Conestoga Electric FSAE</h1>
+    </div>
 
-		<nav>
-			<a href="index.html">Home</a>
-			<a href="Live_Can.html">Live CAN Data</a>
-			<a href="BMS_Data.html">BMS Data</a>
-			<a href="parameters.php">Parameters</a>
-			<a href="3D_View.html" class="active">3D View</a>
-			<a href="live_data.html">Live Data</a>
-			<a href="data_log.html">Data Log</a>
-			<a href="media.html">Weekly Media</a>
-		</nav>
-	</header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Live_Can.html">Diagnostics</a>
+      <a href="BMS_Data.html">BMS Data</a>
+      <a href="parameters.php">Parameters</a>
+      <a href="3D_View.html" class="active">3D View</a>
+      <a href="live_data.html">Live Data</a>
+      <a href="data_log.html">Data Log</a>
+      <a href="media.html">Weekly Media</a>
+    </nav>
+  </header>
 
   <div class="tab-content">
- 
-
-   
-
+    <div id="viewer-container"></div>
   </div>
+
 </body>
 </html>

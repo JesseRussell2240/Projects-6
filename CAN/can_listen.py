@@ -11,7 +11,8 @@ from can_logger import update_live_can_table
 db = cantools.database.load_file('rpi2.dbc')  # Both BAMOCAR and Orion messages
 
 # === Set up CAN bus interface ===
-bus = can.interface.Bus(channel='can1', bustype='socketcan')
+bus = can.Bus(interface='socketcan', channel='can1')
+
 NMAX_RPM = 6600
 
 # === Set up MySQL connection ===

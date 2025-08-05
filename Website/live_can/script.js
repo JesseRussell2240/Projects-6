@@ -1,174 +1,172 @@
-// ======== GLOBAL VARIABLES =========
 const dropdown = document.getElementById('can-id-filter');
 const tbody = document.getElementById('can-table-body');
 const waveformContainer = document.getElementById('waveform-container');
 
-let lastData = [];              // Cache for latest data
-window.chartInstances = [];    // Track active Chart.js instances
+let lastData = [];
+let accelerationChart, velocityChart;
+const MAX_POINTS = 50;
 
-// ======== HEX FORMATTER =========
+// === Integration Tracking ===
+let velocityEstimate = { x: 0, y: 0, z: 0 };
+const SAMPLE_INTERVAL = 2.0; // seconds (matches 2000ms interval)
+
+// ========== Utilities ==========
 function hex(num, len = 2) {
   return '0x' + Number(num).toString(16).toUpperCase().padStart(len, '0');
 }
 
-// ======== TABLE POPULATION =========
+function hexToRgb(hex) {
+  hex = hex.replace(/^#/, '');
+  const bigint = parseInt(hex, 16);
+  return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255].join(',');
+}
+
+// ========== Table ==========
 function populateTable(data, selectedId) {
   tbody.innerHTML = '';
-
   data.forEach(msg => {
     const idHex = hex(msg.id, 3);
     if (selectedId !== 'all' && idHex !== selectedId) return;
-
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${idHex}</td>
-      <td>${hex(msg.length)}</td>
-      <td>${hex(msg.byte0)}</td>
-      <td>${hex(msg.byte1)}</td>
-      <td>${hex(msg.byte2)}</td>
-      <td>${hex(msg.byte3)}</td>
-      <td>${hex(msg.byte4)}</td>
-      <td>${hex(msg.byte5)}</td>
-      <td>${hex(msg.byte6)}</td>
-      <td>${hex(msg.byte7)}</td>
-      <td>${msg.count}</td>
-      <td>${msg.timestamp}</td>
+    const row = `
+      <tr>
+        <td>${idHex}</td><td>${hex(msg.length)}</td>
+        ${[...Array(8).keys()].map(i => `<td>${hex(msg[`byte${i}`])}</td>`).join('')}
+        <td>${msg.count}</td><td>${msg.timestamp}</td>
+      </tr>
     `;
-    tbody.appendChild(row);
+    tbody.insertAdjacentHTML('beforeend', row);
   });
 }
 
-// ======== DROPDOWN UPDATE =========
 function updateDropdownOptions(data) {
-  const ids = [...new Set(data.map(msg => hex(msg.id, 3)))];
-  const existingOptions = Array.from(dropdown.options).map(o => o.value);
-
-  ids.forEach(id => {
-    if (!existingOptions.includes(id)) {
-      const option = document.createElement('option');
-      option.value = id;
-      option.textContent = id;
-      dropdown.appendChild(option);
+  const uniqueIds = [...new Set(data.map(msg => hex(msg.id, 3)))];
+  const existing = Array.from(dropdown.options).map(o => o.value);
+  uniqueIds.forEach(id => {
+    if (!existing.includes(id)) {
+      const opt = new Option(id, id);
+      dropdown.appendChild(opt);
     }
   });
 }
 
-// ======== MULTI-CHART WAVEFORM DRAWER =========
+// ========== Waveform Viewer ==========
 function drawWaveformSet(data) {
   waveformContainer.innerHTML = '';
-  window.chartInstances.forEach(chart => chart.destroy());
-  window.chartInstances = [];
-
-  data.forEach((msg, index) => {
-    const bytes = [
-      msg.byte0, msg.byte1, msg.byte2, msg.byte3,
-      msg.byte4, msg.byte5, msg.byte6, msg.byte7
-    ];
-
-    // Convert bytes to bitstream
-    let bitstream = [];
-    let hexLabels = [];
-
-    bytes.forEach(byte => {
-      for (let i = 7; i >= 0; i--) {
-        bitstream.push((byte >> i) & 1);
-      }
-      hexLabels.push(hex(byte)); // For visual overlay
-    });
-
-    // Build bitstream waveform
-    const labels = [];
-    const values = [];
-    for (let i = 0; i < bitstream.length; i++) {
-      labels.push(`b${i}`);
-      values.push(bitstream[i] === 1 ? 0 : 5);  // Dominant bits = 0V
-    }
-
-    // Chart container
-    const section = document.createElement('div');
-    section.style.marginBottom = '40px';
-
-    const label = document.createElement('p');
-    label.style.color = '#ffd700';
-    label.textContent = `CAN ID: ${hex(msg.id, 3)} | Timestamp: ${msg.timestamp}`;
-    section.appendChild(label);
-
+  data.forEach((msg, i) => {
+    const bytes = Array.from({ length: 8 }, (_, j) => msg[`byte${j}`]);
+    const bits = bytes.flatMap(b => [...Array(8)].map((_, k) => (b >> (7 - k)) & 1));
+    const values = bits.map(b => (b === 1 ? 0 : 5));
     const canvas = document.createElement('canvas');
-    canvas.id = `waveformChart${index}`;
-    canvas.width = 1000;
-    canvas.height = 200;
-    section.appendChild(canvas);
+    canvas.width = 1000; canvas.height = 200;
 
-    // Add hex overlay labels
-    const hexOverlay = document.createElement('div');
-    hexOverlay.style.display = 'flex';
-    hexOverlay.style.justifyContent = 'space-between';
-    hexOverlay.style.color = '#ffd700';
-    hexOverlay.style.fontSize = '0.9rem';
-    hexOverlay.style.marginTop = '4px';
-    hexOverlay.style.width = canvas.width + 'px';
+    const container = document.createElement('div');
+    container.style.marginBottom = '30px';
+    container.innerHTML = `<p style="color:#ffd700;">CAN ID: ${hex(msg.id, 3)} | Timestamp: ${msg.timestamp}</p>`;
+    container.appendChild(canvas);
 
-    hexLabels.forEach(hexVal => {
-      const hexEl = document.createElement('div');
-      hexEl.textContent = hexVal;
-      hexEl.style.flex = '1';
-      hexEl.style.textAlign = 'center';
-      hexOverlay.appendChild(hexEl);
+    const overlay = document.createElement('div');
+    overlay.style = "display:flex;justify-content:space-between;color:#ffd700;font-size:0.9rem;margin-top:4px;width:1000px";
+    bytes.forEach(b => {
+      const div = document.createElement('div');
+      div.textContent = hex(b);
+      div.style = "flex:1;text-align:center;";
+      overlay.appendChild(div);
     });
+    container.appendChild(overlay);
+    waveformContainer.appendChild(container);
 
-    section.appendChild(hexOverlay);
-    waveformContainer.appendChild(section);
-
-    // Create Chart
-    const ctx = canvas.getContext('2d');
-    const chart = new Chart(ctx, {
+    new Chart(canvas.getContext('2d'), {
       type: 'line',
       data: {
-        labels: labels,
+        labels: bits.map((_, i) => `b${i}`),
         datasets: [{
           label: 'Bitstream',
           data: values,
           borderColor: '#ffd700',
-          backgroundColor: 'rgba(255, 215, 0, 0.2)',
-          borderWidth: 2,
+          backgroundColor: 'rgba(255,215,0,0.2)',
           stepped: true,
+          borderWidth: 2,
           pointRadius: 0
         }]
       },
       options: {
         responsive: false,
-        //animation: false,
         scales: {
           y: {
-            beginAtZero: true,
-            suggestedMax: 5,
-            ticks: {
-              callback: (val) => `${val}V`
-            },
-            title: {
-              display: true,
-              text: 'Voltage (V)',
-              color: '#ffd700'
-            }
+            min: 0,
+            max: 5,
+            title: { display: true, text: 'Voltage (V)', color: '#ffd700' },
+            ticks: { callback: v => `${v}V` }
           },
-          x: {
-            ticks: { color: '#ccc' }
-          }
+          x: { ticks: { color: '#ccc' } }
         },
         plugins: {
-          legend: {
-            labels: { color: '#ffd700' }
-          }
+          legend: { labels: { color: '#ffd700' } }
         }
       }
     });
-
-    window.chartInstances.push(chart);
   });
 }
 
 
-// ======== EVENT BINDINGS =========
+// ========== Charts ==========
+function createGraph(ctx, labelSet, colors, yMin = -100, yMax = 100) {
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: labelSet.map((d, i) => ({
+        label: d,
+        data: [],
+        borderColor: colors[i],
+        backgroundColor: `rgba(${hexToRgb(colors[i])}, 0.2)`,
+        fill: true
+      }))
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      scales: {
+        x: { title: { display: true, text: 'Time (s)' } },
+        y: {
+          min: yMin,
+          max: yMax,
+          title: { display: true, text: 'Value' }
+        }
+      },
+      plugins: {
+        legend: { labels: { color: '#333' } }
+      }
+    }
+  });
+}
+
+function updateGraph(chart, data) {
+  const now = new Date().toLocaleTimeString();
+  chart.data.labels.push(now);
+  chart.data.datasets[0].data.push(data.x);
+  chart.data.datasets[1].data.push(data.y);
+  chart.data.datasets[2].data.push(data.z);
+  if (chart.data.labels.length > MAX_POINTS) {
+    chart.data.labels.shift();
+    chart.data.datasets.forEach(ds => ds.data.shift());
+  }
+  chart.update();
+}
+
+// ========== Fetch test_data.json ==========
+async function fetchTestGraphData() {
+  try {
+    const response = await fetch('./9DOF.json');
+    return await response.json();
+  } catch (err) {
+    console.error('[Test Data Fetch Error]', err);
+    return null;
+  }
+}
+
+// ========== Dropdown Filter ==========
 dropdown.addEventListener('change', () => {
   const filtered = dropdown.value === 'all'
     ? lastData
@@ -178,8 +176,9 @@ dropdown.addEventListener('change', () => {
   drawWaveformSet(filtered);
 });
 
-// ======== DATA FETCH INTERVAL =========
+// ========== Main Interval ==========
 setInterval(() => {
+  // Live CAN table and waveform
   fetch('live_can/live_can_table.php')
     .then(res => res.json())
     .then(data => {
@@ -194,4 +193,36 @@ setInterval(() => {
       drawWaveformSet(filtered);
     })
     .catch(err => console.error("[CAN Fetch Error]", err));
+
+  // Acceleration/velocity graphs from test_data.json
+  fetchTestGraphData().then(test => {
+    if (!test) return;
+
+    const acc = test.acceleration || { x: 0, y: 0, z: 0 };
+
+    // Estimate velocity from integrated acceleration
+    velocityEstimate.x += acc.x * SAMPLE_INTERVAL;
+    velocityEstimate.y += acc.y * SAMPLE_INTERVAL;
+    velocityEstimate.z += acc.z * SAMPLE_INTERVAL;
+
+    updateGraph(accelerationChart, acc);
+    updateGraph(velocityChart, velocityEstimate);
+  });
 }, 2000);
+
+// ========== On Load ==========
+document.addEventListener('DOMContentLoaded', () => {
+  const accCtx = document.getElementById('accelerationGraph')?.getContext('2d');
+  const velCtx = document.getElementById('velocityGraph')?.getContext('2d');
+
+  if (accCtx && velCtx) {
+    // Updated scale ranges
+    accelerationChart = createGraph(accCtx, ['X', 'Y', 'Z'], ['red', 'green', 'blue'], -20, 20);
+    velocityChart     = createGraph(velCtx, ['X', 'Y', 'Z'], ['orange', 'purple', 'cyan'], -1000, 1000);
+  }
+});
+
+// ========== Optional: Velocity Reset Button ==========
+function resetVelocity() {
+  velocityEstimate = { x: 0, y: 0, z: 0 };
+}

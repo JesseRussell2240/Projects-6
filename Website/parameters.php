@@ -103,7 +103,7 @@ include 'parameters/fetch.php';
   </div>
   <nav>
     <a href="index.html">Home</a>
-    <a href="Live_Can.html">Live CAN Data</a>
+    <a href="Live_Can.html">Diagnostics</a>
     <a href="BMS_Data.html">BMS Data</a>
     <a href="parameters.php" class="active">Parameters</a>
     <a href="3D_View.html">3D View</a>

@@ -41,6 +41,22 @@ nav a:hover {
   border-radius: 5px;            /* Rounded corners */
 }
 
+.chart-container {
+  width: 80%;
+  max-width: 800px;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  margin: 20px auto;
+}
+
+canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
 /* === ACTIVE NAV LINK STYLES === */
 nav a.active {
   background-color: #1a1a00;     /* Slightly tinted background for active tab */

@@ -6,7 +6,7 @@ Gracefully resets CAN interfaces can0 and can1 by:
 3. Increasing txqueuelen
 4. Ensuring clean socket shutdown
 
-Author: Zach McEwen (based on IEEE ChatGPT assistance, July 2025)
+Author: Zach McEwen
 """
 
 import subprocess
